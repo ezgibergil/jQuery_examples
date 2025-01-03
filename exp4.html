@@ -1,0 +1,58 @@
+<!--Kullanıcı Göster/Gizle butonuna tıkladığında içerik yavaşça açılıp kapanacak şekilde animasyon ekleyin-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Göster/Gizle Animasyonu</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #content {
+            display: none; 
+            background-color: lightgray;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        #toggle-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #toggle-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Göster/Gizle Butonuyla İçerik Gösterme</h2>
+
+    <button id="toggle-btn">Göster</button>
+
+    <div id="content">
+        <p>Bu içerik, "Göster" butonuna tıklandığında açılacak ve "Gizle" butonuna tıklandığında kapanacaktır.</p>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            
+            $('#toggle-btn').on('click', function() {
+                var $content = $('#content');
+
+                if ($content.is(':visible')) {
+                    $content.slideUp(500); 
+                    $(this).text('Göster'); 
+                } else {
+                    $content.slideDown(500); 
+                    $(this).text('Gizle'); 
+                }
+            });
+        });
+    </script>
+</body>
+</html>
