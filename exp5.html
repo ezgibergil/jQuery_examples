@@ -1,0 +1,76 @@
+<!--Kullanıcının birden fazla seçtiği öğeyi listeye ekleyen kodu yaz-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birden Fazla Seçim Ekleme</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #selected-items {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 300px;
+        }
+        #selected-items li {
+            padding: 5px;
+            margin: 5px 0;
+            background-color: #f4f4f4;
+            border-radius: 3px;
+        }
+        #options {
+            margin-bottom: 20px;
+        }
+        #options label {
+            display: block;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Birden Fazla Seçim Yapın</h2>
+
+    <div id="options">
+        <label><input type="checkbox" class="item" value="Elma"> Elma</label>
+        <label><input type="checkbox" class="item" value="Armut"> Armut</label>
+        <label><input type="checkbox" class="item" value="Muz"> Muz</label>
+        <label><input type="checkbox" class="item" value="Kiraz"> Kiraz</label>
+        <label><input type="checkbox" class="item" value="Üzüm"> Üzüm</label>
+    </div>
+
+    <button id="add-to-list">Listeye Ekle</button>
+
+    <h3>Seçilen Öğeler:</h3>
+    <ul id="selected-items"></ul>
+
+    <script>
+        $(document).ready(function() {
+            $('#add-to-list').on('click', function() {
+                
+                var selectedItems = [];
+                $('.item:checked').each(function() {
+                    selectedItems.push($(this).val());
+                });
+
+                
+                if (selectedItems.length === 0) {
+                    alert('Lütfen en az bir öğe seçin.');
+                } else {
+                    
+                    selectedItems.forEach(function(item) {
+                        var listItem = $('<li>').text(item);
+                        $('#selected-items').append(listItem);
+                    });
+
+                    
+                    $('.item:checked').prop('checked', false);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
