@@ -1,0 +1,41 @@
+<!--Kullanıcı seçeneklerden birini seçtiğinde anket sonucunu görüntüleyen kodu yazın-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anket Sonucu Görüntüleme</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Anket: Hangi programlama dilini seviyorsunuz?</h2>
+
+    <form id="survey-form">
+        <label><input type="radio" name="language" value="JavaScript"> JavaScript</label><br>
+        <label><input type="radio" name="language" value="Python"> Python</label><br>
+        <label><input type="radio" name="language" value="Java"> Java</label><br>
+        <label><input type="radio" name="language" value="C#"> C#</label><br>
+        <label><input type="radio" name="language" value="Ruby"> Ruby</label><br>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            // Anket seçeneği değiştiğinde çalışacak fonksiyon
+            $('input[name="language"]').on('change', function() {
+                var selectedOption = $('input[name="language"]:checked').val(); // Seçilen değeri al
+                if (selectedOption) {
+                    $('#result').text('Seçilen dil: ' + selectedOption); // Sonucu ekrana yazdır
+                }
+            });
+        });
+    </script>
+</body>
+</html>

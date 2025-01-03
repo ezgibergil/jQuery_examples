@@ -1,0 +1,57 @@
+<!--Kullanıcı adı ve şifre girişinin doğru olup olmadığını kontrol eden basit bir doğrulama kodu yazın-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Kullanıcı Girişi</h2>
+    <form id="loginForm">
+        <label for="username">Kullanıcı Adı:</label>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" ><br><br>
+
+        <button type="submit">Giriş Yap</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        $(document).ready(function() {
+            $("#loginForm").submit(function(event) {
+                event.preventDefault();  
+
+                var username = $("#username").val();
+                var password = $("#password").val();
+
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/users',
+                    type: 'GET',
+                    success: function(data) {
+                        var userFound = false;
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].username === username && data[i].password === password) {
+                                userFound = true;
+                                break;
+                            }
+                        }
+                        if (userFound) {
+                            $('#message').text('Login successful');
+                        } else {
+                            $('#message').text('Invalid username or password');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        $('#message').text('An error occurred: ' + error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

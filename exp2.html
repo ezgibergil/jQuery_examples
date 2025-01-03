@@ -1,0 +1,48 @@
+<!--Kullanıcı yazarken ürün listesinden filtrelenen ürünleri listeleyen kodu yazın.-->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Filtreleme</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #product-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        #product-list li {
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Ürün Arama</h2>
+    <input type="text" id="search-input" placeholder="Ürün arayın...">
+    <ul id="product-list">
+        <li>Telefon</li>
+        <li>Bilgisayar</li>
+        <li>Tablet</li>
+        <li>Saç Kurutma Makinesi</li>
+        <li>Televizyon</li>
+        <li>Kamera</li>
+    </ul>
+
+    <script>
+        $(document).ready(function() {
+            $('#search-input').on('keyup', function() {
+                var searchQuery = $(this).val().toLowerCase();
+                $('#product-list li').each(function() {
+                    var product = $(this).text().toLowerCase(); 
+                    if (product.indexOf(searchQuery) > -1) {
+                        $(this).show(); 
+                    } else {
+                        $(this).hide(); 
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
